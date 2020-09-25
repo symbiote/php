@@ -16,13 +16,14 @@ RUN apt-get update \
       libjpeg62-turbo-dev \
       libfreetype6-dev \
       libmcrypt-dev \
+      libonig-dev \
       libicu-dev \
       libxslt1-dev \
       libxslt1.1 \
       msmtp \
   && rm -rf /var/lib/apt/lists/* 
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+RUN docker-php-ext-configure gd \
     && docker-php-ext-install \
 			sockets \
       gd \

@@ -53,3 +53,4 @@ RUN echo '[Date]\ndate.timezone = "Australia/Melbourne"' >> /usr/local/etc/php/c
 
 COPY php.ini /usr/local/etc/php/php.ini
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY memory.ini /usr/local/etc/php/conf.d/memory.ini

@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0-rc-fpm
 
 RUN usermod -u 1000 www-data
 

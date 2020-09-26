@@ -37,7 +37,6 @@ RUN docker-php-ext-configure gd \
       zip \
       soap \
     && pecl install redis-4.0.2 \
-    && pecl install mcrypt-1.0.2 \
     && pecl install xdebug \
     && docker-php-ext-enable redis
 

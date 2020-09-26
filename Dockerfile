@@ -39,8 +39,7 @@ RUN docker-php-ext-configure gd \
     && pecl install redis-4.0.2 \
     && pecl install mcrypt-1.0.2 \
     && pecl install xdebug \
-    && docker-php-ext-enable redis \
-    && docker-php-ext-enable mcrypt 
+    && docker-php-ext-enable redis
 
 # Tideways xhprof.
 RUN xhprof_ext_ver="5.0.2"; \

@@ -3,12 +3,13 @@ FROM php:5.6-fpm
 RUN usermod -u 1000 www-data
 
 
-RUN echo "deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian main" > /etc/apt/sources.list.d/tideways.list \
-	&& apt-get update \
-	&& apt-get install -my gnupg \
-  && curl --silent -o- https://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages/EEB5E8F4.gpg | apt-key add - \
+RUN apt-get update \
+  && apt-get install -my gnupg apt-transport-https \
+  && echo 'deb https://packages.tideways.com/apt-packages debian main' > /etc/apt/sources.list.d/tideways.list \
+  && curl --silent -L -o- https://packages.tideways.com/key.gpg | apt-key add - \
   && apt-get update && apt-get install -y \
       mysql-client \
+      gettext-base \
       libtidy-dev \
       libpng-dev \
       libjpeg62-turbo-dev \
@@ -21,7 +22,7 @@ RUN echo "deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian m
       tideways-daemon \
       tideways-php \
       tideways-cli \
-  && rm -rf /var/lib/apt/lists/* \
+      unzip   && rm -rf /var/lib/apt/lists/* \
   && cp /usr/lib/tideways/tideways.ini /usr/local/etc/php/conf.d/
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \

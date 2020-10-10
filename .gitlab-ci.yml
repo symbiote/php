@@ -12,12 +12,11 @@ docker-build-master:
     - docker push "$CI_REGISTRY_IMAGE"
   only:
     - master
-  except:
-    changes:
-      - 5.6/*
-      - 7.1/*
-      - 7.3/*
-      - 8.x/*
+  changes:
+    - Dockerfile
+    - memory.ini
+    - php.ini
+    - xdebug.ini
 
 docker-build:
   # Official docker image.

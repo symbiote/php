@@ -22,6 +22,7 @@ RUN apt-get update \
      libxslt1-dev \
      libxslt1.1 \
      msmtp \
+     openssh-client \
      unzip \
   && rm -rf /var/lib/apt/lists/* 
 

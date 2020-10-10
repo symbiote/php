@@ -22,6 +22,7 @@ RUN apt-get update \
       libxslt1-dev \
       libxslt1.1 \
       msmtp \
+      openssh-client \
       tideways-daemon \
       tideways-php \
       tideways-cli \

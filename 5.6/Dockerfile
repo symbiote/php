@@ -18,6 +18,7 @@ RUN apt-get update \
       libicu-dev \
       libxslt1-dev \
       libxslt1.1 \
+      openssh-client \
       ssmtp \
       tideways-daemon \
       tideways-php \

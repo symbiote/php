@@ -2,14 +2,16 @@ FROM php:7.1-fpm
 
 RUN usermod -u 1000 www-data
 
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
   && apt-get install -my gnupg \
-  && echo "deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian main" > /etc/apt/sources.list.d/tideways.list \
-  && curl --silent -o- https://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages/EEB5E8F4.gpg | apt-key add - \
+  && echo 'deb https://packages.tideways.com/apt-packages debian main' > /etc/apt/sources.list.d/tideways.list \
+  && curl --silent -L -o- https://packages.tideways.com/key.gpg | apt-key add - \
   && apt-get update \
   && apt-get install -y --allow-unauthenticated \
       default-mysql-client \
+      gettext-base \
       libtidy-dev \
       libpng-dev \
       libjpeg62-turbo-dev \
@@ -24,13 +26,13 @@ RUN apt-get update \
       tideways-php \
       tideways-cli \
       unzip \
-  && rm -rf /var/lib/apt/lists/* \
-  && cp /usr/lib/tideways/tideways.ini /usr/local/etc/php/conf.d/
+   && rm -rf /var/lib/apt/lists/* \
+   && cp /usr/lib/tideways/tideways.ini /usr/local/etc/php/conf.d/
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-configure gmp \
-    && docker-php-ext-install \
-                        sockets \
+   && docker-php-ext-configure gmp \
+   && docker-php-ext-install \
+      sockets \
       gd \
       gmp \
       mysqli \
@@ -42,9 +44,9 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
       pdo_mysql \
       intl \
       zip \
-    && pecl install redis-4.0.2 \
-    && pecl install xdebug \
-    && docker-php-ext-enable \
+   && pecl install redis-4.0.2 \
+   && pecl install xdebug \
+   && docker-php-ext-enable \
       redis
 
 ENV TZ=Australia/Melbourne

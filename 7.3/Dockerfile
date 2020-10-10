@@ -9,32 +9,34 @@ RUN usermod -u 1000 www-data
 RUN apt-get update \
 	&& apt-get install -my gnupg \
 	&& apt-get install -y --allow-unauthenticated \
-      default-mysql-client \
-      libzip-dev \
-      libtidy-dev \
-      libpng-dev \
-      libjpeg62-turbo-dev \
-      libfreetype6-dev \
-      libmcrypt-dev \
-      libicu-dev \
-      libxslt1-dev \
-      libxslt1.1 \
-      msmtp \
-  && rm -rf /var/lib/apt/lists/* 
+       default-mysql-client \
+       gettext-base \
+       libzip-dev \
+       libtidy-dev \
+       libpng-dev \
+       libjpeg62-turbo-dev \
+       libfreetype6-dev \
+       libmcrypt-dev \
+       libicu-dev \
+       libxslt1-dev \
+       libxslt1.1 \
+       msmtp \
+       unzip \
+       && rm -rf /var/lib/apt/lists/* 
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install \
-			sockets \
-      gd \
-      mysqli \
-      tidy \
-      mbstring \
-      opcache \
-      xsl \
-      pdo_mysql \
-      intl \
-      zip \
-      soap \
+	   sockets \
+       gd \
+       mysqli \
+       tidy \
+       mbstring \
+       opcache \
+       xsl \
+       pdo_mysql \
+       intl \
+       zip \
+       soap \
     && pecl install redis-4.0.2 \
     && pecl install mcrypt-1.0.2 \
     && pecl install xdebug \

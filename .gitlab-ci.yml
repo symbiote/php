@@ -81,5 +81,5 @@ docker-php-8.rc:
     changes:
       - 8.rc/*
 
-build-php-cli
+build-php-cli:
   trigger: docker/php-cli

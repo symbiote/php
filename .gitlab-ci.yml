@@ -8,17 +8,16 @@ docker-php-latest:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:7.4" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" -t "$CI_REGISTRY_IMAGE:7.4"  -t symbiote/php-fpm:latest -t symbiote/php-fpm:7.4 .
     - docker push "$CI_REGISTRY_IMAGE"
     - docker push symbiote/php-fpm:latest
     - docker push symbiote/php-fpm:7.4
   only:
     changes:
-    - Dockerfile
-    - memory.ini
-    - php.ini
-    - xdebug.ini
+      - Dockerfile
+      - memory.ini
+      - sspak.phar
+      - tools-entrypoint.sh
 
 docker-php-5.6:
   # Official docker image.
@@ -28,11 +27,12 @@ docker-php-5.6:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 5.6
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:5.6" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:5.6" -t symbiote/php-fpm:5.6 .
     - docker push "$CI_REGISTRY_IMAGE:5.6"
-    - docker push symbiote/php-fpm:5.6 
+    - docker push symbiote/php-fpm:5.6
   only:
     changes:
       - 5.6/*
@@ -45,9 +45,10 @@ docker-php-7.1:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 7.1
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:7.1" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:7.1" -t symbiote/php-fpm:7.1 .
     - docker push "$CI_REGISTRY_IMAGE:7.1"
     - docker push symbiote/php-fpm:7.1
   only:
@@ -62,11 +63,12 @@ docker-php-7.3:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 7.3
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:7.3" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:7.3" -t symbiote/php-fpm:7.3 .
     - docker push "$CI_REGISTRY_IMAGE:7.3"
-    - docker push symbiote/php-fpm:7.3 
+    - docker push symbiote/php-fpm:7.3
   only:
     changes:
       - 7.3/*
@@ -79,14 +81,12 @@ docker-php-8.rc:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 8.rc
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:8-rc" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:8-rc" -t symbiote/php-fpm:8-rd .
     - docker push "$CI_REGISTRY_IMAGE:8-rc"
     - docker push symbiote/php-fpm:8-rc
   only:
     changes:
       - 8.rc/*
-
-build-php-cli:
-  trigger: docker/php-cli

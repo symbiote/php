@@ -11,8 +11,8 @@ docker-php-latest:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker build --pull -t "$CI_REGISTRY_IMAGE:7.4" .
     - docker push "$CI_REGISTRY_IMAGE"
-    - docker push php-fpm:latest
-    - docker push php-fpm:7.4
+    - docker push symbiote/php-fpm:latest
+    - docker push symbiote/php-fpm:7.4
   only:
     changes:
     - Dockerfile
@@ -32,7 +32,7 @@ docker-php-5.6:
     - cd 5.6
     - docker build --pull -t "$CI_REGISTRY_IMAGE:5.6" .
     - docker push "$CI_REGISTRY_IMAGE:5.6"
-    - docker push php-fpm:5.6 
+    - docker push symbiote/php-fpm:5.6 
   only:
     changes:
       - 5.6/*
@@ -49,7 +49,7 @@ docker-php-7.1:
     - cd 7.1
     - docker build --pull -t "$CI_REGISTRY_IMAGE:7.1" .
     - docker push "$CI_REGISTRY_IMAGE:7.1"
-    - docker push php-fpm:7.1
+    - docker push symbiote/php-fpm:7.1
   only:
     changes:
       - 7.1/*
@@ -66,7 +66,7 @@ docker-php-7.3:
     - cd 7.3
     - docker build --pull -t "$CI_REGISTRY_IMAGE:7.3" .
     - docker push "$CI_REGISTRY_IMAGE:7.3"
-    - docker push php-fpm:7.3 
+    - docker push symbiote/php-fpm:7.3 
   only:
     changes:
       - 7.3/*
@@ -83,7 +83,7 @@ docker-php-8.rc:
     - cd 8.rc
     - docker build --pull -t "$CI_REGISTRY_IMAGE:8-rc" .
     - docker push "$CI_REGISTRY_IMAGE:8-rc"
-    - docker push php-fpm:8-rc
+    - docker push symbiote/php-fpm:8-rc
   only:
     changes:
       - 8.rc/*

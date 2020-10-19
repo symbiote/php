@@ -14,8 +14,10 @@ RUN apt-get update \
       libpng-dev \
       libjpeg62-turbo-dev \
       libfreetype6-dev \
+      libgmp-dev\
       libmcrypt-dev \
       libicu-dev \
+      libwebp-dev \
       libxslt1-dev \
       libxslt1.1 \
       openssh-client \
@@ -26,10 +28,12 @@ RUN apt-get update \
       unzip   && rm -rf /var/lib/apt/lists/* \
   && cp /usr/lib/tideways/tideways.ini /usr/local/etc/php/conf.d/
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include \
     && docker-php-ext-install \
 			sockets \
       gd \
+      gmp \
       mysqli \
       tidy \
       mbstring \
@@ -38,6 +42,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
       pdo_mysql \
       xsl \
       intl \
+      soap \
       zip \
     && pecl install redis-4.0.2 \
     && pecl install xdebug-2.5.5 \

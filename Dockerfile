@@ -16,6 +16,7 @@ RUN apt-get update \
        libpng-dev \
        libjpeg62-turbo-dev \
        libfreetype6-dev \
+       libgmp-dev \
        libmcrypt-dev \
        libonig-dev \
        libicu-dev \
@@ -31,6 +32,7 @@ RUN docker-php-ext-configure gd --with-webp --with-freetype --with-jpeg \
     && docker-php-ext-install \
 			sockets \
       gd \
+      gmp \
       mysqli \
       tidy \
       mbstring \

@@ -16,8 +16,10 @@ RUN apt-get update \
        libpng-dev \
        libjpeg62-turbo-dev \
        libfreetype6-dev \
+       libgmp-dev \
        libmcrypt-dev \
        libicu-dev \
+       libwebp-dev \
        libxslt1-dev \
        libxslt1.1 \
        msmtp \
@@ -25,10 +27,11 @@ RUN apt-get update \
        unzip \
        && rm -rf /var/lib/apt/lists/* 
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include \
     && docker-php-ext-install \
 	   sockets \
        gd \
+       gmp \
        mysqli \
        tidy \
        mbstring \

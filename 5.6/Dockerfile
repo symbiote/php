@@ -45,6 +45,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
       soap \
       zip \
     && pecl install redis-4.0.2 \
+    && pecl install timecop-beta \ 
     && pecl install xdebug-2.5.5 \
     && docker-php-ext-enable \
       redis

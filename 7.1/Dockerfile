@@ -22,12 +22,18 @@ RUN apt-get update \
       libwebp-dev \
       libxslt1-dev \
       libxslt1.1 \
+      ldap-utils \
+      ldapscripts \
+      libldb-dev \
+      libldap2-dev \
       msmtp \
       openssh-client \
       tideways-daemon \
       tideways-php \
       tideways-cli \
       unzip \
+   && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
+   && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
    && rm -rf /var/lib/apt/lists/* \
    && cp /usr/lib/tideways/tideways.ini /usr/local/etc/php/conf.d/
 

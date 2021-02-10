@@ -22,10 +22,16 @@ RUN apt-get update \
        libwebp-dev \
        libxslt1-dev \
        libxslt1.1 \
+       ldap-utils \
+       ldapscripts \
+       libldb-dev \
+       libldap2-dev \
        msmtp \
        openssh-client \
        unzip \
-       && rm -rf /var/lib/apt/lists/* 
+    && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
+    && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
+    && rm -rf /var/lib/apt/lists/* 
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include \
     && docker-php-ext-install \

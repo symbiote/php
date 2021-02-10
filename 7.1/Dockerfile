@@ -55,7 +55,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
       zip \
    && pecl install redis-4.0.2 \
    && pecl install timecop-beta \
-   && pecl install xdebug \
+   && pecl install xdebug-2.9.8\
    && docker-php-ext-enable \
       redis
 

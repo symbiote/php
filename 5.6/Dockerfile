@@ -5,7 +5,7 @@ RUN usermod -u 1000 www-data
 
 RUN apt-get update \
   && apt-get install -my gnupg apt-transport-https \
-  && echo 'deb https://packages.tideways.com/apt-packages debian main' > /etc/apt/sources.list.d/tideways.list \
+  && echo 'deb https://packages.tideways.com/apt-packages-main any-version main' | tee /etc/apt/sources.list.d/tideways.list \
   && curl --silent -L -o- https://packages.tideways.com/key.gpg | apt-key add - \
   && apt-get update && apt-get install -y \
       mysql-client \

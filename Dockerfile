@@ -7,8 +7,8 @@ RUN usermod -u 1000 www-data
 # for tideways installation
 
 RUN apt-get update \
-	&& apt-get install -my gnupg \
-	&& apt-get install -y --allow-unauthenticated \
+    && apt-get install -my gnupg \
+    && apt-get install -y --allow-unauthenticated \
        default-mysql-client \
        gettext-base \
        libzip-dev \
@@ -27,16 +27,17 @@ RUN apt-get update \
        ldapscripts \
        libldb-dev \
        libldap2-dev \
+       libssl-dev \
        msmtp \
        openssh-client \
        unzip \
    && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
    && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
-   && rm -rf /var/lib/apt/lists/* 
+   && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure gd --with-webp --with-freetype --with-jpeg \
     && docker-php-ext-install \
-			sockets \
+      sockets \
       gd \
       gmp \
       mysqli \
@@ -48,10 +49,11 @@ RUN docker-php-ext-configure gd --with-webp --with-freetype --with-jpeg \
       intl \
       zip \
       soap \
+    && pecl install mongodb \
     && pecl install redis-4.0.2 \
     && pecl install timecop-beta \
     && pecl install xdebug \
-    && docker-php-ext-enable redis
+    && docker-php-ext-enable redis mongodb
 
 # Tideways xhprof.
 RUN xhprof_ext_ver="5.0.2"; \

@@ -105,7 +105,7 @@ docker-php-8.0:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
-    - cd 8.rc
+    - cd 8.0
     - docker build --pull -t "$CI_REGISTRY_IMAGE:8.0" -t symbiote/php-fpm:8.0 .
     - docker push "$CI_REGISTRY_IMAGE:8.0"
     - docker push symbiote/php-fpm:8.0

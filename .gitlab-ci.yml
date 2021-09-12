@@ -23,10 +23,10 @@ docker-php-latest:
 
 docker-php-latest-alpine:
   # Official docker image.
-  image: docker:19.03.12
+  image: docker:20.10.8
   stage: build
   services:
-    - docker:19.03.12-dind
+    - docker:20.10.8-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}

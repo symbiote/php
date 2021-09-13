@@ -31,7 +31,9 @@ docker-php-latest-alpine:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
   script:
-    - docker build --pull -f Dockerfile-alpine -t symbiote/php-fpm:latest-alpine -t symbiote/php-fpm:7.4-alpine .
+    - docker build --pull -f Dockerfile-alpine -t "$CI_REGISTRY_IMAGE:latest-alpine" -t "$CI_REGISTRY_IMAGE:7.4-alpine"  -t symbiote/php-fpm:latest-alpine -t symbiote/php-fpm:7.4-alpine .
+    - docker push "$CI_REGISTRY_IMAGE:latest-alpine"
+    - docker push "$CI_REGISTRY_IMAGE:7.4-alpine"
     - docker push symbiote/php-fpm:latest-alpine
     - docker push symbiote/php-fpm:7.4-alpine
   only:

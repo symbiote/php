@@ -97,26 +97,6 @@ docker-php-7.3:
     changes:
       - 7.3/*
 
-docker-php-8.rc:
-  # Official docker image.
-  image: docker:19.03.12
-  stage: build
-  services:
-    - docker:19.03.12-dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
-  script:
-    - cd 8.rc
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:8-rc" -t symbiote/php-fpm:8-rc .
-    - docker push "$CI_REGISTRY_IMAGE:8-rc"
-    - docker push symbiote/php-fpm:8-rc
-  only:
-    changes:
-      - 8.rc/*
-build-php-cli:
-  trigger: docker/php-cli
-
 docker-php-8.0:
   # Official docker image.
   image: docker:19.03.12

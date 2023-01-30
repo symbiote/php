@@ -45,24 +45,6 @@ docker-php-latest-alpine:
       - xdebug.ini
       - php.ini
 
-docker-php-5.6:
-  # Official docker image.
-  image: docker:19.03.12
-  stage: build
-  services:
-    - docker:19.03.12-dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
-  script:
-    - cd 5.6
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:5.6" -t symbiote/php-fpm:5.6 .
-    - docker push "$CI_REGISTRY_IMAGE:5.6"
-    - docker push symbiote/php-fpm:5.6
-  only:
-    changes:
-      - 5.6/*
-
 docker-php-7.1:
   # Official docker image.
   image: docker:19.03.12

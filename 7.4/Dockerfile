@@ -23,16 +23,10 @@ RUN apt-get update \
        libxslt1-dev \
        libxslt1.1 \
        libwebp-dev \
-       ldap-utils \
-       ldapscripts \
-       libldb-dev \
-       libldap2-dev \
        libssl-dev \
        msmtp \
        openssh-client \
        unzip \
-   && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
-   && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
    && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure gd --with-webp --with-freetype --with-jpeg \
@@ -52,7 +46,7 @@ RUN docker-php-ext-configure gd --with-webp --with-freetype --with-jpeg \
     && pecl install mongodb \
     && pecl install redis-4.0.2 \
     && pecl install timecop-beta \
-    && pecl install xdebug \
+    && pecl install xdebug-3.1.5 \
     && docker-php-ext-enable redis mongodb
 
 # Tideways xhprof.

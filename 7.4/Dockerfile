@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:7.4-fpm
 
 RUN usermod -u 1000 www-data
 
@@ -44,12 +44,13 @@ RUN docker-php-ext-configure gd --with-webp --with-freetype --with-jpeg \
       zip \
       soap \
     && pecl install mongodb \
-    && pecl install redis \
-    && pecl install xdebug \
+    && pecl install redis-4.0.2 \
+    && pecl install timecop-beta \
+    && pecl install xdebug-3.1.5 \
     && docker-php-ext-enable redis mongodb
 
 # Tideways xhprof.
-RUN xhprof_ext_ver="5.0.4"; \
+RUN xhprof_ext_ver="5.0.2"; \
     mkdir -p /usr/src/php/ext/tideways_xhprof; \
     xhprof_url="https://github.com/tideways/php-xhprof-extension/archive/v${xhprof_ext_ver}.tar.gz"; \
     curl -sL "${xhprof_url}" | tar xz --strip-components=1 -C /usr/src/php/ext/tideways_xhprof; \
